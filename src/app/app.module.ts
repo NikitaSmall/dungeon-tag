@@ -4,6 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './app.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SearchComponent }    from './search/search.component';
+import { NotesComponent }     from './notes/notes.component';
+import { FormComponent }      from './form/form.component';
+
+import { NoteService } from './notes/shared/note.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,7 +19,13 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    SearchComponent,
+    NotesComponent,
+    FormComponent
+  ],
+  providers: [
+    NoteService
   ],
   bootstrap: [
     AppComponent
