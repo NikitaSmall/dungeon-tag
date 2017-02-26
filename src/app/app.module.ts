@@ -9,6 +9,7 @@ import { NotesComponent }     from './notes/notes.component';
 import { FormComponent }      from './form/form.component';
 
 import { NoteService } from './notes/shared/note.service';
+import { TagService }  from './shared/tag.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -25,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
     FormComponent
   ],
   providers: [
-    NoteService
+    NoteService,
+    TagService
   ],
   bootstrap: [
     AppComponent

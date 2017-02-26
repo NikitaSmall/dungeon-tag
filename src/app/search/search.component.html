@@ -5,3 +5,18 @@
 
   <button class="btn btn-primary">Search!</button>
 </form>
+
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Filter by tags:</div>
+  <ul class="list-group">
+    <a
+      class="list-group-item"
+      *ngFor="let tag of tags"
+      (click)="onTagSelect(tag)"
+      [ngClass]="{'list-group-item-info':selectedTags.indexOf(tag) > -1}">
+      {{tag.name}}
+    </a>
+  </ul>
+</div>
