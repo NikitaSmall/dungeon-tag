@@ -3,28 +3,44 @@ import { Headers, Http } from  '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/Rx';
+
 import { Note } from './note.model';
+import { asObservable } from './as-observable';
 
 @Injectable()
 export class NoteService {
   private noteUrl = 'api/notes';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {}
+  private _notes: BehaviorSubject<Note[]> = new BehaviorSubject([]);
 
-  getNotes(): Promise<Note[]> {
-    return this.http.get(this.noteUrl)
-      .toPromise()
-      .then(response => response.json().data as Note[])
-      .catch(this.handleError);
+  constructor(private http: Http) {
+    this.loadInitialData();
   }
 
-  addNote(title: string, tags: string[], text: string): Promise<Note> {
-    return this.http
-      .post(this.noteUrl, JSON.stringify({title: title, tags: tags, text: text}), {headers: this.headers})
-      .toPromise()
-      .then(response => response.json().data as Note)
-      .catch(this.handleError);
+  getNotes(): Observable<Note> {
+    return asObservable(this._notes);
+  }
+
+  loadInitialData(): void {
+    this.http.get(this.noteUrl).subscribe(
+      response => {
+        this._notes.next(response.json().data as Note[]);
+      },
+      this.handleError
+    );
+  }
+
+  addNote(note: Note): void {
+    this.http.post(this.noteUrl, JSON.stringify(note), {headers: this.headers})
+      .subscribe(response => {
+        let notes = this._notes.getValue();
+        notes.push(response.json().data as Note);
+
+        this._notes.next(notes);
+      });
   }
 
   private handleError(error: any): Promise<any> {

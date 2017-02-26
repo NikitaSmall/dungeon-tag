@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Note }        from './shared/note.model';
+import { Component } from '@angular/core';
 import { NoteService } from './shared/note.service';
 
 @Component({
@@ -9,13 +7,6 @@ import { NoteService } from './shared/note.service';
   styleUrls: [ './notes.component.css' ],
   selector: 'dungeon-notes'
 })
-export class NotesComponent implements OnInit {
-  notes: Note[] = [];
-
+export class NotesComponent {
   constructor(private noteService: NoteService) {}
-
-  ngOnInit(): void {
-    this.noteService.getNotes()
-      .then(notes => this.notes = notes);
-  }
 }
