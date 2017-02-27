@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NoteService } from './shared/note.service';
+import { NoteService } from '../shared/note.service';
 
 @Component({
   moduleId: module.id,

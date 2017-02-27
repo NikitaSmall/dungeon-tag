@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { NoteService } from '../notes/shared/note.service';
-import { Note } from '../notes/shared/note.model';
+import { NoteService } from '../shared/note.service';
+import { Note } from '../shared/note.model';
 
 @Component({
   moduleId: module.id,
@@ -14,6 +14,7 @@ export class FormComponent {
   addNote(title: string, tags: string, text: string): void {
     if (!title || !text) { return; }
     let note = {
+      id: Math.floor(Math.random() * (100 - 0)),
       title: title.trim(),
       text: text.trim(),
       tags: tags.split(',').map(tag => tag.trim())

@@ -13,7 +13,7 @@ import { SearchComponent }    from './search/search.component';
 import { NotesComponent }     from './notes/notes.component';
 import { FormComponent }      from './form/form.component';
 
-import { NoteService } from './notes/shared/note.service';
+import { NoteService } from './shared/note.service';
 import { TagService }  from './shared/tag.service';
 
 import { AppRoutingModule } from './app-routing.module';
